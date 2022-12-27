@@ -5,6 +5,14 @@ using namespace std;
 #include <iostream>
 #include <vector>
 
+/**
+ * \brief Информация об элементах класса Student (Этот класс используется для дальнейшего наследования)
+ * @param name ФИО
+ * @param group Номер группы
+ * @param departament Номер кафедры
+ * @param cipher Уникальный шифр
+ */
+
 class Student{
 protected:
     string name;
@@ -12,7 +20,7 @@ protected:
     int departament;
     int cipher;
 
-public:
+public:///В методах класса Student содержатся только get/set методы
     static int count;
     int getCipher() const;
     void setCipher(int);
@@ -24,6 +32,13 @@ public:
     virtual string printEstimates() = 0;
     virtual void setEstimates(int*) = 0;
 };
+
+/**
+ * \brief Класс Graduated наследуется от Student
+ * @param topic Тема дипломной работы
+ * @param place Место написания дипломной работы
+ * @param estimatesErw Оценки за дипломную работу
+ */
 
 class Graduated: public Student{ //3
 private:
@@ -43,6 +58,13 @@ public:
     void setEstimates(int*) override;
 };
 
+/**
+ * \brief Класс OlderStudent наследуется от Student
+ * @param topic Тема УИР
+ * @param place Место написания УИР
+ * @param estimatesErw Оценки за УИР
+ * @param estimates Оценки за семестр
+ */
 
 class OlderStudent: public Student{ //2
 private:
@@ -63,8 +85,13 @@ public:
     string printERWestinates();
     void setEstimates(int*) override;
     void setERWestimates(int*);
-    Graduated* changeType(Graduated*);
+    Graduated* changeType(Graduated*);///<Перевод студента из Старшекурсников в Выпускников
 };
+
+/**
+ * \brief Класс JuniorStudent наследуется от Student
+ * @param estimates Оценки за семестр
+ */
 
 class JuniorStudent: public Student{ //1
 private:
@@ -76,7 +103,7 @@ public:
     string getType() override;
     string printEstimates() override;
     void setEstimates(int*) override;
-    OlderStudent* changeType(OlderStudent*);
+    OlderStudent* changeType(OlderStudent*);///<Перевод студента из Младшекурсников в Старшекурсников
 };
 
 void printTable();
