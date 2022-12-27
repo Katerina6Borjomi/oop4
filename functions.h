@@ -3,15 +3,19 @@
 using namespace std;
 #include <cstring>
 #include <iostream>
-
+#include <vector>
 
 class Student{
 protected:
     string name;
     int group;
     int departament;
+    int cipher;
 
 public:
+    static int count;
+    int getCipher() const;
+    void setCipher(int);
     void printInfo();
     void setName(string);
     void setGroup(int);
@@ -21,14 +25,15 @@ public:
     virtual void setEstimates(int*) = 0;
 };
 
-
 class Graduated: public Student{ //3
 private:
     string topic;
     string place;
-    int estimatesErw[3];
+    int estimatesErw[3]{};
 
 public:
+    Graduated();
+    explicit Graduated(const string& str, int g, int d, const string& str2, const string& str3, int* est);
     string getTopic();
     void setTopic(string);
     string getPlace();
@@ -41,12 +46,14 @@ public:
 
 class OlderStudent: public Student{ //2
 private:
-    int estimates[4];
+    int estimates[4]{};
     string topic;
     string place;
-    int estimatesErw[2];
+    int estimatesErw[2]{};
 
 public:
+    OlderStudent();
+    explicit OlderStudent(string str, int g, int d, const string& str2, const string& str3, int* est, int* erwest);
     string getTopic();
     void setTopic(string);
     string getPlace();
@@ -61,9 +68,11 @@ public:
 
 class JuniorStudent: public Student{ //1
 private:
-    int estimates[5];
+    int estimates[5]{};
 
 public:
+    JuniorStudent();
+    explicit JuniorStudent(string str, int g, int d, int* est);
     string getType() override;
     string printEstimates() override;
     void setEstimates(int*) override;
@@ -71,9 +80,6 @@ public:
 };
 
 void printTable();
-void addNew();
-void search(int);
-void deleteElm(int);
 
 
 
